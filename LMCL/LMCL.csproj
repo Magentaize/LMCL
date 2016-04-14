@@ -84,6 +84,7 @@
     <Compile Include="GlobalCls.cs" />
     <Compile Include="Helper\CustomMessageBox.cs" />
     <Compile Include="Helper\Helper.cs" />
+    <Compile Include="Helper\NotifyPropertyObject.cs" />
     <Compile Include="Helper\RWSetting.cs" />
     <Compile Include="Json\JObject.cs" />
     <Compile Include="Json\JArray.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Json\JReader.cs" />
     <Compile Include="Json\JToken.cs" />
     <Compile Include="Model\LibraryItem.cs" />
+    <Compile Include="Model\LibraryItemName.cs" />
     <Compile Include="Utilities\GetVersion.cs" />
     <Compile Include="Utilities\Hash.cs" />
     <Compile Include="Utilities\Http.cs" />

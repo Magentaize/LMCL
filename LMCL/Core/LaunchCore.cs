@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Windows;
-using Newtonsoft.Json.Linq;
+using Magentaize.Net.LMCL.JsonLite.Linq;
 
 namespace Magentaize.Net.LMCL.Core
 {

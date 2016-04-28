@@ -55,10 +55,7 @@ namespace Magentaize.Net.LMCL.JsonLite.Serialization
         }
 
         // the final (i.e. can't be inherited from like a sealed class or valuetype) item contract
-        internal JsonContract FinalItemContract
-        {
-            get { return _finalItemContract; }
-        }
+        internal JsonContract FinalItemContract => _finalItemContract;
 
         /// <summary>
         /// Gets or sets the default collection items <see cref="JsonConverter" />.

@@ -1,11 +1,20 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json.Linq;
+﻿using Magentaize.Net.LMCL.JsonLite.Linq;
+using System;
+using Magentaize.Net.LMCL.Utilities;
 
 namespace Magentaize.Net.LMCL.Model
 {
     public class LibraryItemName
     {
+        private const string ExtensionName = @".jar";
+
+        private const char SubNameLink = '-';
+
+        /// <summary>
+        /// 获取当前 LibraryItem 对象的文件名属性
+        /// </summary>
+        public string FileName => Name + ExtensionName;
+
         public string Type { get; set; }
 
         public string Company { get; set; }
@@ -17,6 +26,8 @@ namespace Magentaize.Net.LMCL.Model
         public string Version { get; set; }
 
         public string Natives { get; set; }
+
+        public bool IsNatives { get; set; }
 
         /// <summary>
         /// Like "lwjgl-platform-2.9.2-nightly-20140822-natives-linux"
@@ -95,22 +106,16 @@ namespace Magentaize.Net.LMCL.Model
             }
             var temp2 = temp[0].Split('.');
 
-            LibraryItemName result;
             switch (temp2.Length)
             {
                 case 1:
-                    result = new LibraryItemName(temp2[0],temp[1],temp[2]);
-                    break;
+                    return new LibraryItemName(temp2[0],temp[1],temp[2]);
                 case 2:
-                    result = new LibraryItemName(temp2[0], temp2[1], temp[1], temp[2]);
-                    break;
+                    return new LibraryItemName(temp2[0], temp2[1], temp[1], temp[2]);
                 case 3:
-                    result = new LibraryItemName(temp2[0], temp2[1],temp2[2], temp[1], temp[2]);
-                    break;
+                    return new LibraryItemName(temp2[0], temp2[1],temp2[2], temp[1], temp[2]);
                 default: throw new Exception("It's not a library string");
             }
-
-            return result;
         }
 
         /// <summary>
@@ -119,10 +124,11 @@ namespace Magentaize.Net.LMCL.Model
         /// <param name="item"></param>
         /// <param name="natives">Target platform natives JObject</param>
         /// <returns></returns>
-        public static LibraryItemName Parse(string item, JObject natives)
+        public static LibraryItemName Parse(string item, JToken natives)
         {
             var result = Parse(item);
-            result.Natives = natives["windows"].ToString();
+            result.IsNatives = true;
+            result.Natives = GetWindowsNatives(natives["windows"].ToString());
             return result;
         }
 
@@ -132,8 +138,26 @@ namespace Magentaize.Net.LMCL.Model
         /// <returns></returns>
         public override string ToString()
         {
-            var fileName = Name + '-' + Version + '-' + Natives + @".jar";
-            return Path.Combine(Type, Company, Product, Path.Combine(Name, Version, fileName));
+            return Path;
+        }
+
+        /// <summary>
+        /// 获取当前 LibraryItem 对象的相对路径属性
+        /// </summary>
+        /// <returns></returns>
+        public string Path
+        {
+            get
+            {
+                var fileName = Name + SubNameLink + Version + (IsNatives ? (SubNameLink + Natives) : string.Empty) +
+                               ExtensionName;
+                return System.IO.Path.Combine(Type, Company, Product, System.IO.Path.Combine(Name, Version, fileName));
+            }
+        }
+
+        private static string GetWindowsNatives(string str)
+        {
+            return !str.Contains(@"${arch}") ? str.Replace(@"${arch}", SystemInfo.Is64() ? @"64" : @"32") : str;
         }
     }
 }

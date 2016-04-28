@@ -52,10 +52,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
@@ -205,8 +201,11 @@
     <Compile Include="JsonLite\Utilities\TypeExtensions.cs" />
     <Compile Include="JsonLite\Utilities\ValidationUtils.cs" />
     <Compile Include="JsonLite\WriteState.cs" />
+    <Compile Include="Model\ILibraryItem.cs" />
+    <Compile Include="Model\LibraryForgeItem.cs" />
     <Compile Include="Model\LibraryItem.cs" />
     <Compile Include="Model\LibraryItemName.cs" />
+    <Compile Include="Model\LibraryOriginalItem.cs" />
     <Compile Include="Utilities\GetVersion.cs" />
     <Compile Include="Utilities\Hash.cs" />
     <Compile Include="Utilities\Http.cs" />
@@ -214,6 +213,7 @@
     <Compile Include="Utilities\MinecraftServerInfo.cs" />
     <Compile Include="FileInfo.cs" />
     <Compile Include="Utilities\Compression.cs" />
+    <Compile Include="Utilities\SystemInfo.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -245,7 +245,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

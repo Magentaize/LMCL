@@ -213,6 +213,7 @@
     <Compile Include="Utilities\MinecraftServerInfo.cs" />
     <Compile Include="FileInfo.cs" />
     <Compile Include="Utilities\Compression.cs" />
+    <Compile Include="Utilities\Net\HttpWebPost.cs" />
     <Compile Include="Utilities\SystemInfo.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
